@@ -6,7 +6,7 @@
     font-family: Gotham;
     font-style: normal;
     font-weight: 200;
-    src: url(/fonts/GothamSSm-Book_Web.woff2)
+    src: url("fonts/Gotham-Book.otf")
 }
 
 @font-face {
@@ -14,7 +14,7 @@
     font-family: Gotham;
     font-style: normal;
     font-weight: 500;
-    src: url(/fonts/GothamSSm-Bold_Web.woff2)
+    src: url("fonts/Gotham-Bold.otf")
 }
 
 @font-face {
@@ -22,14 +22,17 @@
     font-family: Gotham;
     font-style: normal;
     font-weight: 900;
-    src: url(/fonts/GothamSSm-Black_Web.woff2)
+    src: url("fonts/Gotham-Black.otf")
 }
 
 html {
   font-family: Gotham, Arial, Helvetica, sans-serif;
 	font-weight: 500;
-	overflow-y: scroll;
-	overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	min-height: 100vh;
+	width: 100%;
+	position: relative;
 }
 
 body {
@@ -37,7 +40,13 @@ body {
 	background: #EFEFEF;
 	text-align: center;
 	margin: 0;
-	
+	min-height: 100vh;
+	width: 100%;
+	  justify-content: center;
+  align-items: center;
+  /*overflow: hidden;*/
+	position: relative;
+	oveflow: scroll;
 }
 
 .flip-card {
@@ -144,30 +153,6 @@ body {
 
 .unhidden, .hidden {
 	transition: opacity 0.5s;
-}
-
-
-/*added for spinner*/
-/*
-*{
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  outline: none;
-}
-*/
-
-
-body{
-  /*font-family: Open Sans;*/
-  /*display: flex;*/
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
-  /*background: rgb(60,60,242);
-  background: linear-gradient(90deg, rgba(60,60,242,1) 0%, rgba(98,245,230,1) 52%, rgba(60,60,242,1) 100%);
-  background-size: cover;*/
 }
 
 .mainbox{
@@ -533,7 +518,7 @@ header a {
 #guide-container {
 	position: absolute;
 	width: 500px;
-	height: 100vh;
+	height: 100%;
 	background-color: #323232;
 	transition:left 0.5s ease;
 	z-index: 0;
@@ -583,16 +568,18 @@ position: absolute;
 .guide-icon-text {
 	margin: auto;
 	padding: 1em; 
+	height: auto;
 }
 
 #whiteout {
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 100%;
 	background-color: #EFEFEF;
 	transition: opacity 0.5s;
+	overflow: auto;
 }
 
 #whiteout.unopen {
