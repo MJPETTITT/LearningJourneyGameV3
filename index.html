@@ -6,135 +6,56 @@
 <script src="script.js"></script>
 </head>
 
-<body onload="shuffle(questions); addEnter();">
+<body onload="checkURL(); prepareDeck();">
 <header>
 
     <div class="logo header-left"></div>
     <div class="guide-button header-left" onClick="openIt(document.getElementById('guide-container')); openIt(document.getElementById('whiteout'))">Instructions</div>
-    <input class="guide-button header-left input-text" id="player-name" type="text" placeholder="Add up to 9 players here.">
-	<div class="guide-button header-left button" id="add-player" onClick="populatePawns();">Add player</div>
-	
-	<div class="guide-button header-right"><div id="timer">5:00 </div></div>
-	<div class="guide-button header-right"><div id="question-number">Question 0/21 </div></div>
-	
-
+<div class="guide-button header-right" ><span onClick="startStopTimer();" id="play-pause">⏵︎</span><span id="timer" onkeyup="timerCheck();" class="inline" contenteditable="true">1:30</span></div>
 </header>
 
 	
-<div id="player-container">
-
-    <div id="player-list">
-		
-		<div id="pawns-all">
-<!--
-		<div class="pawn-container">
-      <div class="player-pawn">
-        <div class="player-1 active"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Lyuba</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-2"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Vincent</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-3"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Luisa</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-4"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Kyriaki</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-5"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Hanne</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-6"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Fleur</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-7"></div>
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Nina</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-8"></div>
-		  
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Ben</div>
-		</div>
-		
-		<div class="pawn-container inactive">
-      <div class="player-pawn">
-        <div class="player-9"></div>
-		  
-      </div>
-      <div class="pawn-shadow"></div>
-			<div class="player-name">Jerry</div>
-		</div>
--->
-    </div>
-    </div>
-	  
-</div>
 <div id="game-container">
-  <div id="flipper" class="float-left">
-    <div class="flip-card " id="card-a" onclick="flipOnOff();">
-      <div class="flip-card-inner">
-        <div class="flip-card-front" id="card-front-a">
-          <div class="container">
-            <div class="center">
-              <h1>question</h1>
-            </div>
+	
+<div id="flipper" onclick="flipOnOff();">
+  <div class="flip-card" id="card-a">
+    <div class="flip-card-inner">
+      <div class="flip-card-front gradient-blue" id="card-front-a">
+        <div class="container">
+          <div class="center">
+            <h1>Q1</h1>
           </div>
         </div>
-        <div class="flip-card-back" id="card-back-a">
-          <div class="container">
-            <div class="center">
-              <h2 id="question-container">how would you do this?</h2>
-            </div>
+      </div>
+      <div class="flip-card-back" id="card-back-a">
+        <div class="container">
+          <div class="center">
+            <h2 id="question-a-container"></h2>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div id="mainbox-container" class="float-right">
-    <div id="mainbox" class="mainbox">
-      <div id="box" class="box">
-        <div class="box1"> <span class="span1"><b><img alt="icon" class="icon" src="images/icons-01.png"></b></span> <span class="span2"><b><img alt="icon" class="icon" src="images/icons-02.png"></b></span> <span class="span3"><b><img alt="icon" class="icon" src="images/icons-03.png"></b></span> <span class="span4"><b><img alt="icon" class="icon" src="images/icons-04.png"></b></span> </div>
-        <div class="box2"> <span class="span1"><b><img alt="icon" class="icon" src="images/icons-01.png"></b></span> <span class="span2"><b><img alt="icon" class="icon" src="images/icons-02.png"></b></span> <span class="span3"><b><img alt="icon" class="icon" src="images/icons-03.png"></b></span> <span class="span4"><b><img alt="icon" class="icon" src="images/icons-04.png"></b></span> </div>
+  <div class="flip-card" id="card-b">
+    <div class="flip-card-inner">
+      <div class="flip-card-front gradient-blue" id="card-front-b">
+        <div class="container">
+          <div class="center">
+            <h1>Q2</h1>
+          </div>
+        </div>
       </div>
-      <button class="spin" onclick="rotateFunction()">SPIN</button>
+      <div class="flip-card-back" id="card-back-b">
+        <div class="container">
+          <div class="center">
+            <h2 id="question-b-container" class="hidden"></h2>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+</div>
+
 </div>
 
 	<div id="whiteout" class="open"></div>
@@ -142,21 +63,16 @@
 	
 	<div id="guide-container" class="open" onClick="unopenIt(document.getElementById('guide-container'));unopenIt(document.getElementById('whiteout'));">
 		<div class="x-button">X</div>
-	<h2>The Learning Journey Game</h2>
-		<h3>How to play</h3>
-		<p>1. Add up to 9 players by entering their names at the top of the page and clicking the green button.</p>
-		<p>2. Once you are ready to play, click the pink card deck to reveal a question.</p>
-		<p>3. Click the spinning wheel to see how you should answer this question.</p>
-		<div class="icon-guide">
-		<div><img class="guide-icon" alt="icon" src="images/icons-01.png"><span class="guide-icon-text">Answer the question yourself.</span> </div>
-		<div><img class="guide-icon" alt="icon"  src="images/icons-02.png"><span class="guide-icon-text">Answer the question by drawing. Others interpret it. Then explain.</span></div>
-		<div><img class="guide-icon" alt="icon" src="images/icons-03.png"><span class="guide-icon-text">Ask the question to the group. Facilitate the discussion.</span></div>
-		<div><img class="guide-icon" alt="icon"  src="images/icons-04.png"><span class="guide-icon-text">Ask the next player on the list.</span></div>
-		</div>
-		<p>4. Spend 5 minutes on the question. There is a timer on screen that will start when you turn the card.</p>
-		<p>5. Click the card deck to stop your turn, and click again to start with the next player.</p>
-		<p>Keep going until you have completed all of the questions!</p>
-			
+	<h2>GETTING TO KNOW EACH OTHER</h2>
+		<p>The goal of this exercise is to get to know your peers a little better. For this exercise, you will gather in pairs or small groups. Then follow 4 easy steps:</p>
+		<p>1. Decide who starts. </p>
+		<p>2. Click the cards to reveal two question options.</p>
+		<p>3. Ask your peer(s) one of the two questions on the cards. You can choose who answers.</p>
+		<p>4. Take turns until the networking activity is over.</p>
+		<h2>TOP TIPS</h2>
+		<p>Let one person share their screen, so everyone can read the questions.</p>
+		<p>Try to be short, so you can answer more questions. There is a timer to help you keep track of time. You can change the timer length yourself in the top right corner (click on the numbers). </p>
+		<p>Be flexible: adapt your question if you notice it’s difficult to answer, or move on to the next cards.</p>			
 </div>
 </body>
 </html>
